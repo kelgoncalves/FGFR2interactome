@@ -10,9 +10,9 @@ How to install: devtools::install_github("kelgoncalves/FGFR2interactome", userna
 
 How to use:
 
-  library(FGFR2interactome)
+  - library(FGFR2interactome)
   
-  data(Body_PPI)
+  - data(Body_PPI)
   
-  data(Breast_PPI)
+  - data(Breast_PPI)
 
