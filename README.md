@@ -16,3 +16,8 @@ How to use:
   
   - data("Breast_PPI")
 
+Visualize the datasets:
+
+  - View(Body_PPI)
+  
+  - View(Breast_PPI)
