@@ -6,4 +6,9 @@ This page provides a data R package containing:
   
   - Healthy breast tissue-specific interactome: Breast_PPI
 
-How to install: devtools::install_github("kelgoncalves/FGFR2interactome/", username = "kelgoncalves", build_vignette = FALSE)
+How to install: devtools::install_github("kelgoncalves/FGFR2interactome", username = "kelgoncalves", build_vignette = FALSE)
+How to use:
+  -library(FGFR2interactome)
+  -data(Body_PPI)
+  -data(Breast_PPI)
+
