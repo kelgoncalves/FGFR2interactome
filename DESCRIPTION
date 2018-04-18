@@ -5,11 +5,9 @@ Version: 0.99.6
 Author: Kelin G. Oliveira, Mauro A. A. Castro.
 Maintainer: Kelin G. Oliveira <kelin.g.oliveira@gmail.com>, Mauro A. A. Castro <mauro.a.castro@gmail.com>
 Description: The package FGFR2interactome contains input data used to plot FGFR interactomes and to perform modulatory analysis (Mindy algorithm).
-Depends: R (>= 3.4)
+Depends: R (>= 3.5)
+VignetteBuilder: knitr
 License: Artistic-2.0
 biocViews: AnnotationData, FunctionalAnnotation
 Encoding: UTF-8
 LazyData: true
-LazyLoad: yes
-NeedsCompilation: no
-Packaged: 2018-04-13 00:07:57 UTC; kelin
