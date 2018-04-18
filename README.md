@@ -10,13 +10,19 @@ How to install: devtools::install_github("kelgoncalves/FGFR2interactome", userna
 
 How to use:
 
+  Call the package after installed:
+
   - library(FGFR2interactome)
+  
+  Load the vignette to access the tutorial:
+  
+  - vignette("FGFR2interactome")
+  
+  Load and view the datasets:
   
   - data("Body_PPI")
   
   - data("Breast_PPI")
-
-Visualize the datasets:
 
   - View(Body_PPI)
   
