@@ -39,7 +39,8 @@
 }
 }
 \usage{
-data(FGFR2_interactome)
+data("Body_PPI")
+data("Breast_PPI")
 }
 \description{
 Data package used to perform PPI plots and modulatory analysis.
