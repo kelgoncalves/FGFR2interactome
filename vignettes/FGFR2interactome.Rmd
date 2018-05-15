@@ -9,11 +9,31 @@ vignette: >
   %\VignetteEncoding{UTF-8}
   %\SweaveUTF8
 ---
-# Plotting FGFR2 interactome
+
+#The FGFR2interactome package
+This package provides data and instructions to reproduce two computational methods - protein-protein interaction (PPI) network plots and modulatory analysis based on Mindy algorithm - contained in the article entitled **"EPHA2 and PBX1 mediate FGFR2 signalling associated with breast cancer risk regulators and modulate tamoxifen responsiveness"**.
+
+The two first plots in this vignette depicts an equivalent representation of the constructed PPI networks shown as **Fig2** in the article (depicted below). The networks were built through datamining of 13 databases when searched for FGFR2-interacting proteins of tissue-specific and tissue-inespecific situations.
+
+```{r, echo= FALSE, out.width = "800px"}
+knitr::include_graphics("figs/PPI.jpg")
+```
+<caption>**Figure 1** - PPI network arrangement presented in the article. **a** - Tissue-inespecific network for healthy human organism. **b** - Healthy breast tissue-specific interactions.  </caption>
+
+The second analysis featured in this vignette, the modulatory analysis based on Mindy algorithm, will compute which FGFR2-interacting proteins are candidate modulators of transcriptional factors important for breast cancer phenotype. The results for two FGFR2 transducers, PBX1 and EPHA2, can be seen in **Fig.4c** and **Fig.4d** of the article and are also depicted below. 
+
+
+```{r, echo= FALSE, out.width = "800px"}
+knitr::include_graphics("figs/FIG4_vignette.png")
+```
+
+# Plotting FGFR2 interactomes
 
 ##Load necessary tools
 
 ###Packages
+To call necessary packages, run the lines below. If one or more packages are not yet installed, you can get them at the Bioconductor repository.
+
 ```{r eval=FALSE}
 library(RedeR)
 
@@ -21,6 +41,7 @@ library(igraph)
 
 library(RColorBrewer)
 ```
+  
 ### Data-mining results
 ```{r eval=FALSE}
 data("Body_PPI")
@@ -60,14 +81,30 @@ addLegend.color(rdp, colvec=gr_fgfr2_ints, title="Databases")
 relax(rdp,p1=10,p2=80,p3=10,p4=100,p5=100,p6=100,p7=10,p8=10,ps=FALSE)
 ```
 
-Select nodes that represent connections that occured 10 times or more.
+Select nodes that represent connections that occured 10 times or more along the databases and select FGFR2, as well.
 ```{r eval=FALSE}
-nodes<- as.character(Body_PPI$Int.2[which(Body_PPI$Total>=10)])
-selectNodes(rdp,nodes)
+selected<-c(as.character(Body_PPI$Int.2[which(Body_PPI$Total>=10)]), "FGFR2")
+
+nodes_to_hide<- Body_PPI$Int.2[-which(Body_PPI$Int.2 %in% selected)]
+selectNodes(rdp,nodes_to_hide)
+```
+After selecting nodes, go to the Java interface, right click on a selected node, go to Label and choose the option Hide.
+
+Run this next line to deselect the nodes and see the final graph.
+```{r eval=FALSE}
+deSelectNodes(rdp)
 ```
 
+```{r, echo= FALSE, fig.width = 15, fig.height=15}
+knitr::include_graphics("figs/vignetteppi.jpg")
+```
 
 ## Breast tissue-specific connections
+First, clean the Java interface environment. 
+```{r eval=FALSE}
+resetd(rdp)
+```
+
 Create variables containing the vertices and edges. Convert data frame to an igraph object.
 ```{r eval=FALSE}
 vert_ppi_m<- Breast_PPI[,c(2,8)]
@@ -93,17 +130,28 @@ relax(rdp,p1=10,p2=80,p3=10,p4=100,p5=100,p6=100,p7=10,p8=10,ps=FALSE)
 
 Select nodes that represent connections that occured 3 times or more.
 ```{r eval=FALSE}
-nodes<- as.character(Breast_PPI$Int.2[which(Breast_PPI$Total>=3)])
-selectNodes(rdp,nodes)
+selected<- c(as.character(Breast_PPI$Int.2[which(Breast_PPI$Total>=3)]), "FGFR2")
+nodes_to_hide<- Breast_PPI$Int.2[-which(Breast_PPI$Int.2 %in% selected)]
+selectNodes(rdp,nodes_to_hide)
+```
+After selecting nodes, go to the Java interface, right click on a selected node, go to Label and choose the option Hide.
+
+Run this next line to deselect the nodes and see the final graph.
+```{r eval=FALSE}
+deSelectNodes(rdp)
 ```
 
-Clean environment
-```{r eval=FALSE}
-rm(list = ls())
+```{r, echo= FALSE, out.width = "800px"}
+knitr::include_graphics("figs/breastppi.jpg")
 ```
 
 
 # Modulatory analysis (Mindy algorithm)
+
+Clean the global environment
+```{r eval=FALSE}
+rm(list = ls())
+```
 
 ## Load necessary tools
 ### Packages
